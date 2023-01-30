@@ -17,8 +17,8 @@ func main() {
         fmt.Print("Usage: ", filepath.Base(os.Args[0]), " Filename")
         return
     }
-    path := os.Args[1]
 
+    path := os.Args[1]
     file, err := os.Open(path)
     if err != nil {
         fmt.Println(err)
