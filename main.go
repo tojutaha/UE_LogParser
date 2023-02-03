@@ -6,8 +6,6 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
-
-	"github.com/TwiN/go-color"
 )
 
 func main() {
@@ -27,20 +25,16 @@ func main() {
 
     scanner := bufio.NewScanner(file)
     scanner.Split(bufio.ScanLines)
-    var lines []string
 
     for scanner.Scan() {
-        lines = append(lines, scanner.Text())
+        if strings.Contains(scanner.Text(), "Warning") {
+            fmt.Println("\033[33m", scanner.Text())
+        }
+        if strings.Contains(scanner.Text(), "Error") {
+            fmt.Println("\033[31m", scanner.Text())
+        }
     }
 
+    fmt.Println("\033[0m")
     file.Close()
-
-    for _, line := range lines {
-        if strings.Contains(line, "Warning") {
-            fmt.Println(color.Colorize(color.Yellow, line))
-        }
-        if strings.Contains(line, "Error") {
-            fmt.Println(color.Colorize(color.Red, line))
-        }
-    }
 }
